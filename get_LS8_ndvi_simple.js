@@ -33,6 +33,10 @@ var addVariables = function(image) {
   return image
   // Add an NDVI band.
   .addBands(image.normalizedDifference(['SR_B5', 'SR_B4']).rename('NDVI'))
+  // Add an NDWI water band
+  .addBands(image.normalizedDifference(['SR_B3','SR_B5']).rename('NDWI_W'))
+  // Add an NDWI veg band
+  .addBands(image.normalizedDifference(['SR_B5','SR_B6']).rename('NDWI_V'))
   // Add a time band.
   .addBands(ee.Image(years).rename('time')).float()
   // Add a constant band.
