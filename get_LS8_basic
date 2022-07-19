@@ -37,6 +37,14 @@ var filteredLandsat = landsat8Sr
 
 var image = filteredLandsat.sort('CLOUD_COVER').first().clip(bbox);
 
+// Display all metadata.
+print('All metadata:', image);
+print('Metadata:', image.get('LANDSAT_PRODUCT_ID'))
+var opt_filename = ee.String("LS8_optical_").cat(image.get('DATE_ACQUIRED'));
+var der_filename = ee.String("LS8_derived_").cat(image.get('DATE_ACQUIRED'));
+print(opt_filename);
+print(der_filename);
+
 // Visualizar uma composicao colorida utilizando multiplas bandas
 Map.addLayer(image, {min: 11000, max: 18000, bands: ['SR_B6', 'SR_B5', 'SR_B4']}, 'Composicao Landsat');
 Map.addLayer(image, {min: 11000, max: 18000, bands: ['SR_B4', 'SR_B3', 'SR_B2']}, 'Composicao Landsat 2');
