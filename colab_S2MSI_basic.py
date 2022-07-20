@@ -98,7 +98,7 @@ if b_ndwi_v:
 # [8] -- retrieve metadata from image
 dct_meta = dict(image.getInfo())
 s_id_full = dct_meta['id']
-s_name_image = s_id_full.split('/')[-1][:11]
+s_name_image = 'S2A_' + s_id_full.split('_')[-1]
 print(s_id_full)
 print(s_name_image)
 # Get the timestamp.
