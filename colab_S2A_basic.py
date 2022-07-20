@@ -142,7 +142,6 @@ while task.active():
         print('Polling for task (id: {}).'.format(task.id))
         time.sleep(10)
 # ndvi option:
-b_ndvi = True
 if b_ndvi:
     print('** NDVI **')
     task = ee.batch.Export.image.toDrive(**
@@ -162,7 +161,6 @@ if b_ndvi:
             print('Polling for task (id: {}).'.format(task.id))
             time.sleep(10)
 # ndwi_w option:
-b_ndwi_w = True
 if b_ndwi_w:
     print('** NDWI-W **')
     task = ee.batch.Export.image.toDrive(**
@@ -182,7 +180,6 @@ if b_ndwi_w:
             print('Polling for task (id: {}).'.format(task.id))
             time.sleep(10)
 # ndwi_v option:
-b_ndwi_v = True
 if b_ndwi_v:
     print('** NDWI-V **')
     task = ee.batch.Export.image.toDrive(**
