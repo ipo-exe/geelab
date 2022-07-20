@@ -79,60 +79,65 @@ lst_images = list()
 lst_ndvi = list()
 lst_ndwi_v = list()
 lst_ndwi_w = list()
-for i in range(1, len(lst_intervals)):
-    
+for i in range(1, len(lst_intervals)):    
+    # retrieve dates
     s_date_end = lst_intervals[i]
-    s_date_start = lst_intervals[i - 1] 
+    s_date_start = lst_intervals[i - 1]
+    print('\n Interval: {} to {}'.format(s_date_end, s_date_start))
 
-    # -- apply extra filters to dataset
+    # -- apply extra filters to local dataset
     # example: define date filter
-    imcol = imcol.filterDate(s_date_start, s_date_end)
+    imcol_lcl = imcol.filterDate(s_date_start, s_date_end)
     # example: define cloud filter -- 'CLOUD_COVER' for Landsat and 'CLOUDY_PIXEL_PERCENTAGE' for Sentinel
-    imcol = imcol.filterMetadata('CLOUD_COVER', 'less_than', 20)
-
-    # -- process dataset to output called image 
-    # sort and sample first and clip
-    image = imcol.sort('CLOUD_COVER').first().clip(bbox)
-    # select the bands
-    image = image.select(['SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7', 'ST_B10'])
-    lst_images.append(image)
-    
-    # ndvi option:
-    b_ndvi = False
-    if b_ndvi:
-        nir = image.select('SR_B5')
-        red = image.select('SR_B4')
-        ndvi = nir.subtract(red).divide(nir.add(red)).rename('NDVI')
-        lst_ndvi.append(ndvi)
-    # ndwi_w option:
-    b_ndwi_w = False
-    if b_ndwi_w:
-        green = image.select('SR_B3')
-        nir = image.select('SR_B5')
-        ndwi_w = green.subtract(nir).divide(nir.add(green)).rename('NDWIw')
-        lst_ndwi_w.append(ndwi_w)
-    # ndwi_v option:
-    b_ndwi_v = False
-    if b_ndwi_v:
-        nir = image.select('SR_B5')
-        swir = image.select('SR_B6')
-        ndwi_v = nir.subtract(swir).divide(nir.add(swir)).rename('NDWIv')
-        lst_ndwi_v.append(ndwi_v)
-    
-    # -- retrieve metadata from image
-    dct_meta = dict(image.getInfo())
-    s_id_full = dct_meta['id']
-    s_name_image = s_id_full.split('/')[-1][:11]
-    print(s_id_full)
-    print(s_name_image)
-    # Get the timestamp.
-    ee_date = ee.Date(image.get('system:time_start'))
-    # convert to human readable date with ee.Date.format().
-    s_date = ee_date.format().getInfo()[:10]
-    print(s_date)
-    lst_names.append(s_name_image)
-    lst_dates.append(s_date)
-    print('\n')
+    imcol_lcl = imcol_lcl.filterMetadata('CLOUD_COVER', 'less_than', 50)
+    n_images = imcol_lcl.size().getInfo()
+    print('>> {} images found'.format(n_images))
+    if n_images == 0:
+        pass
+    else:
+        # -- process dataset to output called image 
+        # sort and sample first and clip
+        image = imcol.sort('CLOUD_COVER').first().clip(bbox)
+        # select the bands
+        image = image.select(['SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7', 'ST_B10'])
+        lst_images.append(image)
+        
+        # ndvi option:
+        b_ndvi = False
+        if b_ndvi:
+            nir = image.select('SR_B5')
+            red = image.select('SR_B4')
+            ndvi = nir.subtract(red).divide(nir.add(red)).rename('NDVI')
+            lst_ndvi.append(ndvi)
+        # ndwi_w option:
+        b_ndwi_w = False
+        if b_ndwi_w:
+            green = image.select('SR_B3')
+            nir = image.select('SR_B5')
+            ndwi_w = green.subtract(nir).divide(nir.add(green)).rename('NDWIw')
+            lst_ndwi_w.append(ndwi_w)
+        # ndwi_v option:
+        b_ndwi_v = False
+        if b_ndwi_v:
+            nir = image.select('SR_B5')
+            swir = image.select('SR_B6')
+            ndwi_v = nir.subtract(swir).divide(nir.add(swir)).rename('NDWIv')
+            lst_ndwi_v.append(ndwi_v)
+        
+        # -- retrieve metadata from image
+        dct_meta = dict(image.getInfo())
+        s_id_full = dct_meta['id']
+        s_name_image = s_id_full.split('/')[-1][:11]
+        print('>> selected:')
+        print(s_id_full)
+        print(s_name_image)
+        # Get the timestamp.
+        ee_date = ee.Date(image.get('system:time_start'))
+        # convert to human readable date with ee.Date.format().
+        s_date = ee_date.format().getInfo()[:10]
+        print(s_date)
+        lst_names.append(s_name_image)
+        lst_dates.append(s_date)
     
 # [9] -- {optional} view output
 from IPython.display import Image as image_display
