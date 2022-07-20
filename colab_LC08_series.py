@@ -49,16 +49,14 @@ import ee
 # [3] -- authenticate ee
 ee.Authenticate()
 
-# [3] -- initialize ee
+# [4] -- initialize ee
 ee.Initialize()
 
-# [4] -- define the area of interest and/or bounding box and date interval
+# [5] -- define the area of interest and/or bounding box and date interval
 s_aoi_name = 'myaoi'
 bbox = ee.Geometry.Rectangle([-51.1,-29.65, -51.05,-29.6]) # xMin, yMin, xMax, yMax.
-s_date_start = '2020-01-01'
-s_date_end = '2021-01-01'
 
-# [5] -- define dates intervals list 
+# [6] -- define dates intervals list 
 # >> insert code for automatic list setup
 lst_intervals = [
 '2020-01-01',
@@ -67,13 +65,13 @@ lst_intervals = [
 '2020-04-01'
 ]
 
-# [6] -- access dataset
+# [7] -- access dataset
 # define dataset name -- 'LANDSAT/LC08/C02/T1_L2'
 s_dataset_name = 'LANDSAT/LC08/C02/T1_L2'
 # get image collection in the bbox
 imcol = ee.ImageCollection(s_dataset_name).filterBounds(bbox) # filter  
 
-# [7] -- series loop
+# [8] -- series loop
 # deploy lists
 lst_names = list()
 lst_dates = list()
