@@ -56,7 +56,7 @@ ee.Initialize()
 s_aoi_name = 'myaoi'
 bbox = ee.Geometry.Rectangle([-51.1,-29.7, -51.0,-29.6]) # xMin, yMin, xMax, yMax.
 s_date_start = '2020-01-01'
-s_date_end = '2020-01-01'
+s_date_end = '2021-01-01'
 
 # [5] -- access dataset
 # define dataset name -- 'LANDSAT/LC08/C02/T1_L2'
