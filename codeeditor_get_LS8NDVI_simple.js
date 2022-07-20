@@ -1,3 +1,46 @@
+/**
+
+Google Earth Engine Script for the Code Editor API (JavaScript)
+
+>>> routine for downloading NDVI from Landsat 8 imagery 
+- The derived NDVI is the reduced mean for a time interval
+- You may change for downloading NDWI_W and NDWI_V
+
+Copyright (C) 2022 Iporã Brito Possantti
+
+************ GNU GENERAL PUBLIC LICENSE ************
+
+https://www.gnu.org/licenses/gpl-3.0.en.html
+
+Permissions:
+ - Commercial use
+ - Distribution
+ - Modification
+ - Patent use
+ - Private use
+Conditions:
+ - Disclose source
+ - License and copyright notice
+ - Same license
+ - State changes
+Limitations:
+ - Liability
+ - Warranty
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  
+If not, see <https://www.gnu.org/licenses/>.
+*/
+
 // Define aoi. Use the UI Drawing Tools
 
 // get bounding box using buffer (in meters)
@@ -64,17 +107,17 @@ Map.addLayer(ndvi,
   'NDVI Mosaic');
 
 // Export image to drive --- comment / uncomment
-
+// /**
 Export.image.toDrive({
 image: ndvi,
 crs: 'EPSG:4326',
 fileFormat: 'GeoTIFF',
 folder: 'ee_output', // DEFINE FOLDER
-description: 'ndvi_new', // DEFINE FILE NAME
+description: 'ls8ndvi', // DEFINE FILE NAME
 region: bbox,
 scale: 30,
 maxPixels: 1e13
 }) 
-
+// */
 
 // ******************************************************
