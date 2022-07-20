@@ -47,7 +47,7 @@ image_display(image_url, embed=True, format='png')
 # edit parameters
 task = ee.batch.Export.image.toDrive({
 'image' : image,
-'crs': 'EPSG:4326'
+'crs': 'EPSG:4326',
 'description': 'myoutput',
 'folder': 'ee_output', # DEFINE HERE
 'fileNamePrefix' : 'output_',
