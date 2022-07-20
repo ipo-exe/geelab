@@ -45,14 +45,15 @@ image_display(image_url, embed=True, format='png')
 
 # [9] -- {optional} export to Drive
 # edit parameters
-task = ee.batch.Export.image.toDrive({
+task = ee.batch.Export.image.toDrive(**
+{
 'image' : image,
 'crs': 'EPSG:4326',
 'description': 'myoutput',
 'folder': 'ee_output', # DEFINE HERE
 'fileNamePrefix' : 'output_',
 'region' : bbox,
-'scale' : 10, # 30 for Landsat!
+'scale' : 10, # use 30 for Landsat!
 'fileFormat': 'GeoTIFF'
 })
 # start task 
