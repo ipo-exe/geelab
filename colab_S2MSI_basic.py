@@ -74,7 +74,7 @@ imcol = imcol.filterMetadata('CLOUDY_PIXEL_PERCENTAGE', 'less_than', 10)
 # sort and sample first and clip
 image = imcol.first().clip(bbox) #sort('CLOUDY_PIXEL_PERCENTAGE').
 # select the bands
-image = image.select(['B2', 'B3', 'B4', 'B8', 'B11', 'B12', 'ST_B10'])
+image = image.select(['B2', 'B3', 'B4', 'B8', 'B11', 'B12'])
 
 # ndvi option:
 b_ndvi = True
@@ -132,7 +132,7 @@ task = ee.batch.Export.image.toDrive(**
 'description': '{}_{}_{}_reflectance'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
 'folder': 'ee_output', # DEFINE HERE
 'region' : bbox,
-'scale' : 30, # 30 for Landsat and 10 for Sentinel
+'scale' : 10, # 30 for Landsat and 10 for Sentinel
 })
 # start task 
 task.start()
@@ -152,7 +152,7 @@ if b_ndvi:
     'description': '{}_{}_{}_ndvi'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
     'folder': 'ee_output', # DEFINE HERE
     'region' : bbox,
-    'scale' : 30, # 30 for Landsat and 10 for Sentinel
+    'scale' : 10, # 30 for Landsat and 10 for Sentinel
     })
     # start task 
     task.start()
@@ -172,7 +172,7 @@ if b_ndwi_w:
     'description': '{}_{}_{}_ndwi-w'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
     'folder': 'ee_output', # DEFINE HERE
     'region' : bbox,
-    'scale' : 30, # 30 for Landsat and 10 for Sentinel
+    'scale' : 10, # 30 for Landsat and 10 for Sentinel
     })
     # start task 
     task.start()
@@ -192,7 +192,7 @@ if b_ndwi_v:
     'description': '{}_{}_{}_ndwi-v'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
     'folder': 'ee_output', # DEFINE HERE
     'region' : bbox,
-    'scale' : 30, # 30 for Landsat and 10 for Sentinel
+    'scale' : 10, # 30 for Landsat and 10 for Sentinel
     })
     # start task 
     task.start()
