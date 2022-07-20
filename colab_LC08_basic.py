@@ -52,9 +52,11 @@ ee.Authenticate()
 # [3] -- initialize ee
 ee.Initialize()
 
-# [4] -- define the area of interest and/or bounding box
+# [4] -- define the area of interest and/or bounding box and date interval
 s_aoi_name = 'myaoi'
 bbox = ee.Geometry.Rectangle([-51.1,-29.7, -51.0,-29.6]) # xMin, yMin, xMax, yMax.
+s_date_start = '2020-01-01'
+s_date_end = '2020-01-01'
 
 # [5] -- access dataset
 # define dataset name -- 'LANDSAT/LC08/C02/T1_L2'
@@ -64,7 +66,7 @@ imcol = ee.ImageCollection(s_dataset_name).filterBounds(bbox) # filter
 
 # [6] -- apply extra filters to dataset
 # example: define date filter
-imcol = imcol.filterDate('2020-01-01', '2021-01-01')
+imcol = imcol.filterDate(s_date_start, s_date_end)
 # example: define cloud filter -- 'CLOUD_COVER' for Landsat and 'CLOUDY_PIXEL_PERCENTAGE' for Sentinel
 imcol = imcol.filterMetadata('CLOUD_COVER', 'less_than', 10)
 
