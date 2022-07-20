@@ -172,7 +172,7 @@ for i in range(len(lst_images)):
         {
         'image': image,
         'crs': 'EPSG:4326',
-        'description': '{}_{}_{}_reflectance'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
+        'description': '{}_sr_{}_{}'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
         'folder': 'ee_output', # DEFINE HERE
         'region' : bbox,
         'scale' : 30, # 30 for Landsat and 10 for Sentinel
@@ -192,7 +192,7 @@ for i in range(len(lst_images)):
         {
         'image': ndvi,
         'crs': 'EPSG:4326',
-        'description': '{}_{}_{}_ndvi'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
+        'description': '{}_ndvi_{}_{}'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
         'folder': 'ee_output', # DEFINE HERE
         'region' : bbox,
         'scale' : 30, # 30 for Landsat and 10 for Sentinel
@@ -212,7 +212,7 @@ for i in range(len(lst_images)):
         {
         'image': ndwi_w,
         'crs': 'EPSG:4326',
-        'description': '{}_{}_{}_ndwi-w'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
+        'description': '{}_ndwi-w_{}_{}'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
         'folder': 'ee_output', # DEFINE HERE
         'region' : bbox,
         'scale' : 30, # 30 for Landsat and 10 for Sentinel
@@ -232,7 +232,7 @@ for i in range(len(lst_images)):
         {
         'image': ndwi_v,
         'crs': 'EPSG:4326',
-        'description': '{}_{}_{}_ndwi-v'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
+        'description': '{}_ndwi-v_{}_{}'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
         'folder': 'ee_output', # DEFINE HERE
         'region' : bbox,
         'scale' : 30, # 30 for Landsat and 10 for Sentinel
