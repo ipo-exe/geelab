@@ -28,6 +28,8 @@ imcol = imcol.filterMetadata('CLOUDY_PIXEL_PERCENTAGE', 'less_than', 10)
 # [7] -- process dataset to output image 
 # example: sort and sample first
 image = imcol.sort('CLOUDY_PIXEL_PERCENTAGE').first().clip(bbox)
+# example: select the B4 band
+image = image.select('B4')
 
 # [8] -- {optional} view output
 from IPython.display import Image as image_display
