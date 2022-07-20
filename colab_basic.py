@@ -55,7 +55,6 @@ task = ee.batch.Export.image.toDrive(**
 'crs': 'EPSG:4326',
 'description': 'colab_output',  # edit
 'folder': 'ee_output', # DEFINE HERE
-'fileNamePrefix' : 'colab_output',
 'region' : bbox,
 'scale' : 30, # 30 for Landsat and 10 for Sentinel
 })
