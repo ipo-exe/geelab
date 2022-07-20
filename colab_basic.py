@@ -1,5 +1,5 @@
 # [1] -- install ee
-pip install earthengine-api
+!pip install earthengine-api
 
 # [2] -- import earth engine library
 import ee
