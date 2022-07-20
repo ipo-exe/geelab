@@ -156,32 +156,34 @@ image_display(image_url, embed=True, format='png')
 # [10] -- {optional} export to Drive
 # use task manager for task info
 # https://code.earthengine.google.com/tasks
+b_reflectance = True
 # export loop
 for i in range(len(lst_images)):
     
     # retrieve objects
     s_name_image = lst_names[i]
     s_date = lst_dates[i]
-    print('\n {} - {}'.format(s_name_image, s_date))
+    print('\n\n >>{} - {}'.format(s_name_image, s_date))
     image = lst_images[i]
     
-    # edit parameters:
-    task = ee.batch.Export.image.toDrive(**
-    {
-    'image': image,
-    'crs': 'EPSG:4326',
-    'description': '{}_{}_{}_reflectance'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
-    'folder': 'ee_output', # DEFINE HERE
-    'region' : bbox,
-    'scale' : 30, # 30 for Landsat and 10 for Sentinel
-    })
-    # start task 
-    task.start()
-    # monitor task progress
-    import time 
-    while task.active():
-            print('Polling for task (id: {}).'.format(task.id))
-            time.sleep(10)
+    if b_reflectance:
+        # edit parameters:
+        task = ee.batch.Export.image.toDrive(**
+        {
+        'image': image,
+        'crs': 'EPSG:4326',
+        'description': '{}_{}_{}_reflectance'.format(s_aoi_name, s_name_image, s_date), # DEFINE HERE
+        'folder': 'ee_output', # DEFINE HERE
+        'region' : bbox,
+        'scale' : 30, # 30 for Landsat and 10 for Sentinel
+        })
+        # start task 
+        task.start()
+        # monitor task progress
+        import time 
+        while task.active():
+                print('Polling for task (id: {}).'.format(task.id))
+                time.sleep(10)
     # ndvi option:
     if b_ndvi:
         print('** NDVI **')
