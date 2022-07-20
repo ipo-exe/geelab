@@ -72,7 +72,7 @@ imcol = imcol.filterMetadata('CLOUD_COVER', 'less_than', 10)
 
 # [7] -- process dataset to output called image 
 # sort and sample first and clip
-image = imcol.sort('CLOUDY_PIXEL_PERCENTAGE').first().clip(bbox)
+image = imcol.sort('CLOUD_COVER').first().clip(bbox)
 # select the bands
 image = image.select(['SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7', 'ST_B10'])
 
@@ -142,7 +142,6 @@ while task.active():
         print('Polling for task (id: {}).'.format(task.id))
         time.sleep(10)
 # ndvi option:
-b_ndvi = True
 if b_ndvi:
     print('** NDVI **')
     task = ee.batch.Export.image.toDrive(**
@@ -162,7 +161,6 @@ if b_ndvi:
             print('Polling for task (id: {}).'.format(task.id))
             time.sleep(10)
 # ndwi_w option:
-b_ndwi_w = True
 if b_ndwi_w:
     print('** NDWI-W **')
     task = ee.batch.Export.image.toDrive(**
@@ -182,7 +180,6 @@ if b_ndwi_w:
             print('Polling for task (id: {}).'.format(task.id))
             time.sleep(10)
 # ndwi_v option:
-b_ndwi_v = True
 if b_ndwi_v:
     print('** NDWI-V **')
     task = ee.batch.Export.image.toDrive(**
