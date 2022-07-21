@@ -147,7 +147,7 @@ for i in range(len(lst_dates)):
     
     # retrieve objects
     s_date = lst_dates[i]
-    print('\n\n::: export tasks for date: {}'.format(s_tile_id, s_date))
+    print('\n\n::: export tasks for date: {}'.format(s_date))
 
     if b_reflectance:
         lcl_name = lst_sr_names[i]
