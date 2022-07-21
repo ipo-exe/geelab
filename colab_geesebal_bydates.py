@@ -85,13 +85,13 @@ for i in range(len(lst_dates)):
     # get ee image
     lcl_lc08_image = ee.Image(lcl_id).clip(bbox) # clip image
 
-    # select the surface reflectance bands
+    # select the surface reflectance bands and standardize type
     lcl_sr_image = lcl_lc08_image.select(['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B10', 'B11'])
     lcl_sr_name = '{}_LC08-C01-T1_{}_sr_{}'.format(s_aoi_name, s_tile_id, lst_dates[i])
     print(type(lcl_sr_image))
     print(lcl_sr_name)
     lst_sr_names.append(lcl_sr_name)
-    lst_sr_images.append(lcl_lc08_image)
+    lst_sr_images.append(lcl_sr_image)
 
     # compute SEBAL image dataset
     lcl_sebal_image = Image(lcl_lc08_image)
@@ -147,11 +147,11 @@ for i in range(len(lst_dates)):
     
     # retrieve objects
     s_date = lst_dates[i]
-    print('\n\n ::: {} - {}'.format(s_tile_id, s_date))
+    print('\n\n::: export tasks for date: {}'.format(s_tile_id, s_date))
 
     if b_reflectance:
         lcl_name = lst_sr_names[i]
-        print('>> SR {}'.format(lcl_name))
+        print('::: >> SR {}'.format(lcl_name))
         # edit parameters:
         task = ee.batch.Export.image.toDrive(**
         {
@@ -167,7 +167,7 @@ for i in range(len(lst_dates)):
         # monitor task progress
         import time 
         while task.active():
-                print('Polling for task (id: {}).'.format(task.id))
+                print('::: running task (id: {}).'.format(task.id))
                 time.sleep(10)
     if b_et:
         lcl_name = lst_et24h_names[i]
@@ -187,7 +187,7 @@ for i in range(len(lst_dates)):
         # monitor task progress
         import time 
         while task.active():
-                print('Polling for task (id: {}).'.format(task.id))
+                print('::: running task (id: {}).'.format(task.id))
                 time.sleep(10)
     if b_lst:
         lcl_name = lst_lstdem_names[i]
@@ -207,7 +207,7 @@ for i in range(len(lst_dates)):
         # monitor task progress
         import time 
         while task.active():
-                print('Polling for task (id: {}).'.format(task.id))
+                print('::: running task (id: {}).'.format(task.id))
                 time.sleep(10)
 
 
