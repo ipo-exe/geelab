@@ -175,7 +175,7 @@ for i in range(len(lst_dates)):
         # edit parameters:
         task = ee.batch.Export.image.toDrive(**
         {
-        'image': lst_et24h_images[i],
+        'image': lst_et24h_images[i].toFloat(),,
         'crs': 'EPSG:4326',
         'description': lcl_name, 
         'folder': 'ee_output', # DEFINE HERE
@@ -195,7 +195,7 @@ for i in range(len(lst_dates)):
         # edit parameters:
         task = ee.batch.Export.image.toDrive(**
         {
-        'image': lst_lstdem_images[i],
+        'image': lst_lstdem_images[i].toFloat(),,
         'crs': 'EPSG:4326',
         'description': lcl_name, 
         'folder': 'ee_output', # DEFINE HERE
