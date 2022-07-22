@@ -1,3 +1,46 @@
+'''
+
+Google Earth Engine Script for the colab API (Python)
+
+>>> tool for downloading ET and LST imagery using geesebal package 
+
+Copyright (C) 2022 Iporã Brito Possantti
+
+************ GNU GENERAL PUBLIC LICENSE ************
+
+https://www.gnu.org/licenses/gpl-3.0.en.html
+Permissions:
+ - Commercial use
+ - Distribution
+ - Modification
+ - Patent use
+ - Private use
+Conditions:
+ - Disclose source
+ - License and copyright notice
+ - Same license
+ - State changes
+Limitations:
+ - Liability
+ - Warranty
+ 
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  
+
+If not, see <https://www.gnu.org/licenses/>
+
+'''
+
 # [1] -- install ee
 !pip install earthengine-api
 
@@ -40,7 +83,9 @@ bbox = ee.Geometry.Rectangle([vct_bbox[0],
 
 # [11] -- define dates intervals list 
 import pandas as pd
-dtrng = pd.date_range(start='2020-06-01', end='2020-07-01', freq='SMS')
+s_date_start = '2020-06-01'
+s_date_end = '2020-08-01'
+dtrng = pd.date_range(start=s_date_start, end=s_date_end, freq='SMS')
 lst_intervals = list()
 for i in range(len(dtrng)):
     lst_intervals.append(str(dtrng.values[i])[:10])
