@@ -181,19 +181,21 @@ for i in range(1, len(lst_intervals)):
         
         # geeSebal option
         if b_geesebal:
-            # compute SEBAL image dataset
-            sebal_image = Image(image)  
-            print(sebal_image)
-            
-            # ET24h product:
-            if b_et24h:
-                et_image = sebal_image.image.select('ET_24h')
-                dct_et_images['{}_et24h_{}'.format(s_prefix, s_date)] = et_image 
-            
-            # LST product:
-            if b_lst:
-                lst_image = sebal_image.image.select('T_LST_DEM')
-                dct_lst_images['{}_lstDem_{}'.format(s_prefix, s_date)] = lst_image
+            try:
+                # compute SEBAL image dataset
+                sebal_image = Image(image)  
+                print(sebal_image)
+                
+                # ET24h product:
+                if b_et24h:
+                    et_image = sebal_image.image.select('ET_24h')
+                    dct_et_images['{}_et24h_{}'.format(s_prefix, s_date)] = et_image   
+                # LST product:
+                if b_lst:
+                    lst_image = sebal_image.image.select('T_LST_DEM')
+                    dct_lst_images['{}_lstDem_{}'.format(s_prefix, s_date)] = lst_image
+            except:
+                print('Error found')
 
 # [ ] -- {optional} view SR output
 from IPython.display import Image as image_display
