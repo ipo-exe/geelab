@@ -55,7 +55,7 @@ for f in lst_all_files:
     b_isfile = True
     # apply extension criteria
     b_isfile = b_isfile * s_file_extension in f
-    for m in in lst_file_markers:
+    for m in lst_file_markers:
       b_isfile = b_isfile * m in f
     if b_isfile:
       print(f)
