@@ -40,13 +40,18 @@ along with this program.
 If not, see <https://www.gnu.org/licenses/>.
 '''
 
-# [n] -- move files to zip
-
+# [n] -- collect file list
 import os
-
-s_scr_dir = './content/path/folder'  # DEFINE HERE
+# define source folder
+s_scr_dir = '/content/drive/MyDrive/ee_output'  # DEFINE HERE
+os.chdir(s_scr_dir)
+# define file extension
 s_file_extension = '.tif'
-lst_file_markers = ['myaoi', 'ndvi']
+# define file name markers
+s_aoi_name = 'potiribu'
+s_var_name = 'sr'
+lst_file_markers = [s_aoi_name, s_var_name]
+# get all file in the folder
 lst_all_files = os.listdir(s_scr_dir)
 # deploy list
 lst_scr_files = list()
@@ -56,9 +61,34 @@ for f in lst_all_files:
     # apply extension criteria
     b_isfile = b_isfile * s_file_extension in f
     for m in lst_file_markers:
-      b_isfile = b_isfile * m in f
+        b_isfile = b_isfile * m in f
     if b_isfile:
-      print(f)
+        #print(f)
+        lst_scr_files.append('{}'.format(f))
+print(len(lst_scr_files))
+print(lst_scr_files[0])
+
+# [n] -- copy to zip
+from zipfile import ZipFile
+
+# define destiny folder
+s_dst_dir = '/content/drive/MyDrive/myProjects/121_paper_plans3br/inputs/datasets/potiribu'
+# define zip file name
+s_zipname = '{}_{}_window'.format(s_aoi_name, s_var_name)
+# create a ZipFile object
+zipObj = ZipFile('{}/{}.zip'.format(s_dst_dir, s_zipname), 'w')
+# Add multiple files to the zip
+for f in lst_scr_files:
+    zipObj.write(f)
+# close the Zip File
+zipObj.close()
+
+# [n] -- delete from source
+s_ans = input('DANGER ZONE. Irreversible changes. Type <yes> to proceed: ')
+if s_ans == 'yes':
+    print('deleting files...')
+    for f in lst_scr_files:
+        os.remove(f)
 
 
 
