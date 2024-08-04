@@ -55,7 +55,7 @@ def assess_image_catalog(
   # Get Bbox
   if talk:
     print(" --- getting bounding box...")
-  bbox = ee.Geometry.Rectangle(roi_extent)
+  bbox = ee.Geometry.Rectangle(roi)
   
   # Define the date range
   if talk:
