@@ -33,7 +33,7 @@ cloud_cover = {
 # define dates
 dates = [
   "1970-01-01", # baseline date
-  "{}-01-01".format(next_yer)  
+  "{}-01-01".format(next_year)  
 ]
 
 def assess_image_catalog(
