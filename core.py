@@ -70,7 +70,7 @@ def assess_image_catalog(
   # handle void list
   try:
       # retrieve image
-      image_list = im_collection.toList(im_collection.size())      
+      image_list = im_coll.toList(im_coll.size())      
       size = image_list.size().getInfo()
       if talk:
         print(" --- {} images found".format(size))
