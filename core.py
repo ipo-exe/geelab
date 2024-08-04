@@ -50,7 +50,7 @@ def assess_image_catalog(
     end = dates[1]
     
   if talk:
-    print("{} from {} to {} in {}".format(dataset, start, end, roi)
+    print("{} from {} to {} in {}".format(dataset, start, end, roi))
   
   # Get Bbox
   if talk:
