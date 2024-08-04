@@ -36,87 +36,87 @@ dates = [
   "{}-01-01".format(next_year)  
 ]
 
+# ASSESSMENT TOOL
 def assess_image_catalog(
   roi, # list with [xmin, ymin, xmax, ymax]
   dataset, # key for dataset
   start=None,
   end=None,
   talk=True
-):
-  # Hande Nones
-  if start is None:
-    start = dates[0]
-  if end is None:
-    end = dates[1]
-    
-  if talk:
-    print("{} from {} to {} in {}".format(dataset, start, end, roi))
-  
-  # Get Bbox
-  if talk:
-    print(" --- getting bounding box...")
-  bbox = ee.Geometry.Rectangle(roi)
-  
-  # Define the date range
-  if talk:
-    print(" --- getting date range...")
-  dt_range = ee.DateRange(start, end)
+):  
+    # Hande Nones
+    if start is None:
+        start = dates[0]
+    if end is None:
+        end = dates[1]
 
-  # get image collection
-  if talk:
-    print(" --- getting image collection...")
-  im_coll = (ee.ImageCollection(datasets[dataset]).filterDate(dt_range).filterBounds(bbox))
+    if talk:
+        print("{} from {} to {} in {}".format(dataset, start, end, roi))
 
-  # handle void list
-  try:
-      # retrieve image
-      image_list = im_coll.toList(im_coll.size())      
-      size = image_list.size().getInfo()
-      if talk:
-        print(" --- {} images found".format(size))
-      
-      # loop in image list
-      ls_date = []
-      ls_cloud = []
-      ls_id = []
-      for i in range(size):
-          # get image
-          image = ee.Image(image_list.get(i))
-          image_id = image.id().getInfo()
-          image_date = image.date().format('YYYY-MM-dd').getInfo()
-          cloud_coverage = image.get(cc[dataset]).getInfo()
-          if talk:
-            print(" --- {}/{} -- {} {} {} {} {}".format(
+    # Get Bbox
+    if talk:
+        print(" --- getting bounding box...")
+    bbox = ee.Geometry.Rectangle(roi)
+
+    # Define the date range
+    if talk:
+        print(" --- getting date range...")
+    dt_range = ee.DateRange(start, end)
+
+    # get image collection
+    if talk:
+        print(" --- getting image collection...")
+    im_coll = (ee.ImageCollection(datasets[dataset]).filterDate(dt_range).filterBounds(bbox))
+
+    # handle void list
+    try:
+        # retrieve image
+        image_list = im_coll.toList(im_coll.size())      
+        size = image_list.size().getInfo()
+        if talk:
+            print(" --- {} images found".format(size))
+
+        # loop in image list
+        ls_date = []
+        ls_cloud = []
+        ls_id = []
+        for i in range(size):
+            # get image
+            image = ee.Image(image_list.get(i))
+            image_id = image.id().getInfo()
+            image_date = image.date().format('YYYY-MM-dd').getInfo()
+            cloud_coverage = image.get(cloud_cover[dataset]).getInfo()
+            if talk:
+                print(" --- {}/{} -- {} {} {}".format(
                 i + 1, 
                 size,
-                roi_code, asset,
                 image_id,
                 image_date,
                 cloud_coverage
                 )
-            )
-          # collect metadata
-          ls_id.append(image_id)
-          ls_date.append(image_date)
-          ls_cloud.append(cloud_coverage)
-          
-      # return dataframe
-      df = pd.DataFrame(
-          {
+                )
+            # collect metadata
+            ls_id.append(image_id)
+            ls_date.append(image_date)
+            ls_cloud.append(cloud_coverage)
+            
+        # return dataframe
+        df = pd.DataFrame(
+            {
             "ImageID": ls_id,
             "Date": ls_date,
             "CloudCover%": ls_cloud
-          }
-      )
-      # extra constant columns
-      df["Dataset"] = dataset
-      df["DatasetID"] = datasets[dataset]
-      return df
+            }
+        )
+        # extra constant columns
+        df["Dataset"] = dataset
+        df["DatasetID"] = datasets[dataset]
+        return df
             
-  except:
-      if talk:
-        print("No images found")
-      return 0
+    except:
+        if talk:
+            print("No images found")
+        return 0
 
   
   
