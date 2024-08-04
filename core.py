@@ -25,7 +25,7 @@ cloud_cover = {
   "Landsat 9": "CLOUD_COVER",
 	"Landsat 8": "CLOUD_COVER",
 	"Landsat 7": "CLOUD_COVER",
-	"Landsat 5":: "CLOUD_COVER",
+	"Landsat 5": "CLOUD_COVER",
   "Sentinel 2": "CLOUDY_PIXEL_PERCENTAGE",
   # todo handle others like Landsat 4, 3, 2 and MODIS
 }
