@@ -51,7 +51,7 @@ import visuals
 # [n] -- collect date list
 import os
 # define source folder
-s_scr_dir = '/content/drive/MyDrive/ee_output'  # DEFINE HERE
+s_scr_dir = '/content/drive/.../folder'  # DEFINE HERE
 os.chdir(s_scr_dir)
 # define file extension
 s_file_extension = '.tif'
@@ -85,11 +85,11 @@ print(len(lst_scr_dates))
 # [n] -- copy to zip
 from zipfile import ZipFile
 # define destiny folder
-s_dst_dir = '/content/drive/MyDrive/myProjects/121_paper_plans3br/inputs/datasets/potiribu'
+s_dst_dir = '/content/drive/.../folder'
 
 # [n] --  plot and zip 
 # define source folder
-s_scr_dir = '/content/drive/MyDrive/ee_output'  # DEFINE HERE
+s_scr_dir = '/content/drive/.../folder'  # DEFINE HERE
 os.chdir(s_scr_dir)
 # define file extension
 s_file_extension = '.tif'
