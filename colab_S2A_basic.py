@@ -60,7 +60,7 @@ s_date_end = '2021-01-01'
 
 # [5] -- access dataset
 # define dataset name
-s_dataset_name = 'COPERNICUS/S2_SR'
+s_dataset_name = 'COPERNICUS/S2_SR_HARMONIZED' # for TOA: 'COPERNICUS/S2_HARMONIZED'
 # get image collection in the bbox
 imcol = ee.ImageCollection(s_dataset_name).filterBounds(bbox) # filter   
 
